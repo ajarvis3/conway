@@ -21,10 +21,11 @@ const Game = () => {
       const ctx = canvasRef.current.getContext("2d");
       ctx!.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       ctx!.lineWidth = 3;
-      for (var w = 0; w < game.width; w++) {
-         for (var h = 0; h < game.height; h++) {
-            const fillColor = game.alive[w][h] ? "#ffffff" : "#000000";
-            const borderColor = game.alive[w][h] ? "#000000" : "#ffffff";
+      for (var h = 0; h < game.height; h++) {
+         for (var w = 0; w < game.width; w++) {
+            console.log(w, h, game);
+            const fillColor = game.alive[h][w] ? "#ffffff" : "#000000";
+            const borderColor = game.alive[h][w] ? "#000000" : "#ffffff";
             const x = w * boxWidth.current;
             const y = h * boxHeight.current;
             ctx!.fillStyle = fillColor;
@@ -63,7 +64,7 @@ const Game = () => {
          if (!canvasRef || !canvasRef.current) return;
          const x = Math.floor(event.nativeEvent.offsetX / boxWidth.current);
          const y = Math.floor(event.nativeEvent.offsetY / boxHeight.current);
-         setGame(game.toggleAlive(x, y));
+         setGame(game.toggleAlive(y, x));
       },
       [game, width, height]
    );
