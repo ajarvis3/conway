@@ -20,6 +20,7 @@ const Game = () => {
       if (!canvasRef || !canvasRef.current) return;
       const ctx = canvasRef.current.getContext("2d");
       ctx!.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      ctx!.lineWidth = 3;
       for (var w = 0; w < game.width; w++) {
          for (var h = 0; h < game.height; h++) {
             const fillColor = game.alive[w][h] ? "#ffffff" : "#000000";
@@ -67,7 +68,15 @@ const Game = () => {
       [game, width, height]
    );
 
-   return <canvas id="conway-game" ref={canvasRef} onClick={onClick}></canvas>;
+   return (
+      <canvas
+         id="conway-game"
+         ref={canvasRef}
+         onClick={onClick}
+         width={window.innerWidth * 0.9}
+         height={window.innerHeight * 0.9}
+      ></canvas>
+   );
 };
 
 export default Game;
