@@ -26,11 +26,11 @@ const Game = () => {
             console.log(w, h, game);
             const fillColor = game.alive[h][w] ? "#ffffff" : "#000000";
             const borderColor = game.alive[h][w] ? "#000000" : "#ffffff";
+            ctx!.fillStyle = fillColor;
+            ctx!.strokeStyle = borderColor;
             const x = w * boxWidth.current;
             const y = h * boxHeight.current;
-            ctx!.fillStyle = fillColor;
             ctx!.fillRect(x, y, boxWidth.current, boxHeight.current);
-            ctx!.fillStyle = borderColor;
             ctx!.beginPath();
             ctx!.rect(x, y, boxWidth.current, boxHeight.current);
             ctx!.stroke();
@@ -66,7 +66,7 @@ const Game = () => {
          const y = Math.floor(event.nativeEvent.offsetY / boxHeight.current);
          setGame(game.toggleAlive(y, x));
       },
-      [game, width, height]
+      [game]
    );
 
    return (
@@ -74,7 +74,7 @@ const Game = () => {
          id="conway-game"
          ref={canvasRef}
          onClick={onClick}
-         width={window.innerWidth * 0.9}
+         width={window.innerHeight * 0.9}
          height={window.innerHeight * 0.9}
       ></canvas>
    );
