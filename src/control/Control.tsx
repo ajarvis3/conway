@@ -3,11 +3,16 @@ import { useRecoilState } from "recoil";
 import { heightState, widthState } from "../recoil-state";
 import RunButton from "./RunButton";
 import IControlProps from "./types/ControlProps";
+import validator from "validator";
 
 const ControlItem = (props: IControlProps) => {
    const { state, setState, label } = props;
    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setState(parseInt(event.target.value));
+      if (validator.isInt(event.target.value)) {
+         setState(parseInt(event.target.value));
+      } else {
+         setState(0);
+      }
    };
 
    return (
