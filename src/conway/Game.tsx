@@ -20,7 +20,6 @@ const Game = () => {
       if (!canvasRef || !canvasRef.current) return;
       const ctx = canvasRef.current.getContext("2d");
       ctx!.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-      ctx!.lineWidth = 3;
       for (var h = 0; h < game.height; h++) {
          for (var w = 0; w < game.width; w++) {
             const fillColor = game.alive[h][w] ? "#ffffff" : "#000000";
@@ -69,13 +68,22 @@ const Game = () => {
       [game]
    );
 
+   const smallDimension =
+      window.innerHeight < window.innerWidth
+         ? window.innerHeight * 0.9
+         : window.innerWidth * 0.9;
+   const widthMultiplier = width > height ? 1 : width / height;
+   const heightMultiplier = height > width ? 1 : height / width;
+   const canvasWidth = smallDimension * widthMultiplier;
+   const canvasHeight = smallDimension * heightMultiplier;
+
    return (
       <canvas
          id="conway-game"
          ref={canvasRef}
          onClick={onClick}
-         width={window.innerHeight * 0.9}
-         height={window.innerHeight * 0.9}
+         width={canvasWidth}
+         height={canvasHeight}
       ></canvas>
    );
 };
