@@ -23,9 +23,9 @@ const Game = () => {
       ctx!.lineWidth = 3;
       for (var h = 0; h < game.height; h++) {
          for (var w = 0; w < game.width; w++) {
-            console.log(w, h, game);
             const fillColor = game.alive[h][w] ? "#ffffff" : "#000000";
-            const borderColor = game.alive[h][w] ? "#000000" : "#ffffff";
+            // const borderColor = game.alive[h][w] ? "#000000" : "#ffffff";
+            const borderColor = "#808080";
             ctx!.fillStyle = fillColor;
             ctx!.strokeStyle = borderColor;
             const x = w * boxWidth.current;
